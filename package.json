@@ -10,10 +10,13 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^6.5.1",
+    "fontfaceobserver": "^2.0.5",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.1",
     "gulp-postcss": "^6.2.0",
     "gulp-sass": "^2.3.2",
-    "gulp-sass-lint": "^1.2.0"
+    "gulp-sass-lint": "^1.2.0",
+    "gulp-uglify": "^2.0.0"
   }
 }

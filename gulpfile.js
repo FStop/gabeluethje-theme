@@ -3,7 +3,9 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     livereload = require('gulp-livereload'),
-    sassLint = require('gulp-sass-lint')
+    sassLint = require('gulp-sass-lint'),
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat');
 
 gulp.task('sass-lint'), function() {
     return gulp.src('./assets/scss/**/*.scss')
@@ -19,9 +21,19 @@ gulp.task('sass', function () {
     .pipe(livereload());
 });
 
-gulp.task('watch', function () {
-    livereload.listen();
-    gulp.watch('./assets/scss/**/*.scss', ['sass']);
+// Concatenate & Minify JS
+gulp.task('scripts', function() {
+    return gulp.src('./assets/js/src/*.js')
+    .pipe(concat('scripts.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('assets/js/dist'))
+    .pipe(livereload())
 });
 
-gulp.task('default',['sass-lint', 'sass', 'watch']);
+gulp.task('watch', function () {
+    livereload.listen();
+    gulp.watch('./assets/scss/**/*.scss', ['sass-lint', 'sass']);
+    gulp.watch('./assets/js/src/*.js', ['scripts']);
+});
+
+gulp.task('default',['sass-lint', 'sass', 'scripts', 'watch']);
