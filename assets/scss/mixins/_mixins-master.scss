@@ -1,3 +1,19 @@
+// Mixes a color with white.
+// @param {Color} $color
+// @return {Color}
+
+@function tint($color, $percent) {
+  @return mix(#fff, $color, $percent);
+}
+
+// Mixes a color with black.
+// @param {Color} $color
+// @return {Color}
+
+@function shade($color, $percent) {
+  @return mix(#000, $color, $percent);
+}
+
 // Rem output with px fallback
 @mixin font-size($sizeValue: 1) {
 	font-size: ($sizeValue * 16) * 1px;
