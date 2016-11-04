@@ -104,6 +104,7 @@ add_action( 'widgets_init', 'fstop_widgets_init' );
 
 function fstop_scripts() {
 	wp_enqueue_style( 'fstop-style', get_template_directory_uri() . '/assets/css/style.css' );
+	wp_enqueue_style( 'fstop-g-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' );
 
 	wp_enqueue_script( 'fstop-fontfaceobserver', get_template_directory_uri() . '/assets/js/lib/fontfaceobserver.js', array(), '20161026', false );
 
