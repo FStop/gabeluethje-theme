@@ -2,6 +2,7 @@
 
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
     livereload = require('gulp-livereload'),
     sassLint = require('gulp-sass-lint'),
     uglify = require('gulp-uglify'),
@@ -16,9 +17,11 @@ gulp.task('sass-lint'), function() {
 
 gulp.task('sass', function () {
     return gulp.src('./assets/scss/style.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass({
         //
     }).on('error', sass.logError))
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./assets/css'))
     .pipe(livereload());
 });
