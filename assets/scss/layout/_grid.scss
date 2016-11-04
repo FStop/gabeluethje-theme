@@ -1,0 +1,308 @@
+// device breakpoints, used by include-media @media mixins
+$breakpoints: (
+  medium: 45.625em,
+  large: 64em
+);
+
+// Grid configuration
+$grid-width: 1440px !default;
+$columns: 12 !default;
+
+// Defaults, used in some grid functions before being overridden by values in the $grid-sizes map.
+$gutter: 30px !default;
+$outter-padding: 45px !default;
+$row-spacing: 1rem !default;
+
+// a Sass map, used to generate media queries, gutter,
+// outer padding, and bleed values at the different breakpoints.
+$grid-sizes: (
+  sm: (
+    mq: '<medium',
+    gutter: 15px,
+    outer-padding: 30px,
+    // calc function gives us variable outer padding (15px - 50px) between 320px and 729px viewport width
+    // credit: http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
+    // calc function gives us variable outer padding (15px - 50px) between 320px and 729px viewport width
+    // credit: http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
+    // outer-padding: calc(15px + (50 - 15) * ((100vw - 320px)/(729 - 320))),
+    // bleed: calc(-15px - (50 - 15) * ((100vw - 320px)/(729 - 320)))
+  ),
+  md: (
+    mq: '>=medium',
+    gutter: 25px,
+    outer-padding: 50px,
+  ),
+  lg: (
+    mq: '>=large',
+    gutter: 30px,
+    outer-padding: 60px,
+  )
+) !default;
+
+/// Map deep get
+/// @author Hugo Giraudel
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// get outer-padding value function for use in custom scss grid styling
+// @param {$size}, quoted string matching a value in the $sizes map
+// @returns outer padding width at specified size
+@function get-outer-padding($size) {
+  @return map-deep-get($grid-sizes, $size, outer-padding);
+}
+
+// get gutter value functionl for use in custom scss grid styling
+// @param {$size}, quoted string matching a value in the $sizes map
+// @returns gutter width at specified size
+@function get-gutter($size) {
+  @return map-deep-get($grid-sizes, $size, gutter);
+}
+
+// col-width function, for cacluating grid column widths
+// @param {$span} - fraction, number of columns (1/12, 4/12, etc)
+// @param {$gutter} - number with px or % unit, gutter widht for the current breakpoint
+// @returns CSS calc() function
+@function col-width($span, $gutter) {
+  $percentage: 100% * $span;
+  @return calc(#{$percentage} - #{$gutter});
+}
+
+// bleed function, for making an element bleed to the edge of the screen, overriding Grid outer padding.
+// @param {$size} - string, size key from $grid-sizes map
+// @param {$direction} - string, left, right, or full. Defaults to full
+// @param {$mq} - boolean, whether or not to generate media queries
+// @mixin bleed($size: 'md', $direction: 'full', $mq: false) {
+//   @if $size == 'fullscreen' {
+//     width: 100vw;
+//     margin-right: 0;
+//     margin-left: calc(-50vw + 50%);
+//   } @else {
+//     $amount: map-deep-get($grid-sizes, $size, bleed);
+//     @if $direction == 'right' {
+//       margin-right: $amount;
+//     } @else if $direction == 'left' {
+//       margin-left: $amount;
+//     } @else if $direction == 'full' {
+//       margin-right: $amount;
+//       margin-left: $amount;
+//     } @else {
+//       margin-right: $amount;
+//       margin-left: $amount;
+//     }
+
+//     @if $mq == true {
+//       @each $size, $key in $grid-sizes {
+//         $amount: map-get($key, bleed);
+//         @include media(map-get($key, mq)) {
+//           @if $direction == 'right' {
+//             margin-right: $amount;
+//           } @else if $direction == 'left' {
+//             margin-left: $amount;
+//           } @else if $direction == 'full' {
+//             margin-right: $amount;
+//             margin-left: $amount;
+//           } @else {
+//             margin-right: $amount;
+//             margin-left: $amount;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+@mixin row($gutter: $gutter, $size: '', $mq: false) {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+
+  @if $mq == true {
+    @each $size, $key in $grid-sizes {
+      @include media(map-get($key, mq)) {
+        margin-right: (-(map-get($key, gutter) / 2));
+        margin-left: (-(map-get($key, gutter) / 2));
+      }
+    }
+  } @else {
+    @if map-has-key($grid-sizes, $size) {
+      margin-right: (-(map-deep-get($grid-sizes, $size, gutter) / 2));
+      margin-left: (-(map-deep-get($grid-sizes, $size, gutter) / 2));
+    } @else {
+      margin-right: (-($gutter / 2));
+      margin-left: (-($gutter / 2));
+    }
+  }
+
+  margin-bottom: $row-spacing;
+}
+
+@mixin column-fixed($span, $gutter: $gutter, $size: '') {
+  @if map-has-key($grid-sizes, $size) {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: col-width($span, map-deep-get($grid-sizes, $size, gutter));
+    min-width: 0; // ref: http://stackoverflow.com/a/28754644/6226533
+    margin: 0 (map-deep-get($grid-sizes, $size,  gutter) / 2);
+  } @else {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: col-width($span, $gutter);
+    min-width: 0; // ref: http://stackoverflow.com/a/28754644/6226533
+    margin: 0 ($gutter / 2);
+  }
+}
+
+@mixin column-flex($gutter) {
+  flex: 1;
+  margin: 0 ($gutter / 2);
+}
+
+// Grid mixins
+@mixin container {
+  width: 100%;
+  max-width: $grid-width;
+  margin: 0 auto;
+
+  @each $size, $key in $grid-sizes {
+    @include media(map-get($key, mq)) {
+      padding: 0 map-get($key, outer-padding);
+    }
+  }
+}
+
+// // Base classes
+// .grid-wrapper {
+//   @include container;
+// }
+
+// .grid-row {
+//   @include row;
+//   @each $size, $key in $grid-sizes {
+//     @include media(map-get($key, mq)) {
+//       margin: 0 (-(map-get($key, gutter) / 2));
+//     }
+//   }
+// }
+
+// // helper classes
+// .grid-jc-st { justify-content: flex-start; }
+// .grid-jc-en { justify-content: flex-end; }
+// .grid-jc-ct { justify-content: center; }
+// .grid-jc-bt { justify-content: space-between; }
+// .grid-jc-ar { justify-content: space-around; }
+
+// //generate base grid classes
+// .grid-w-flex {
+//   @include column-flex($gutter);
+
+//   @each $size, $key in $grid-sizes {
+//     @include media(map-get($key, mq)) {
+//       @include column-flex(map-get($key, gutter));
+//     }
+//   }
+// }
+
+// @for $i from 1 through $columns {
+//   .grid-w-#{$i}-of-#{$columns} {
+//     @include column-fixed($i / $columns, $gutter);
+
+//     @each $size, $key in $grid-sizes {
+//       @include media(map-get($key, mq)) {
+//         @include column-fixed($i / $columns, map-get($key, gutter));
+//       }
+//     }
+//   }
+// }
+
+// //generate media query grid classes
+// @each $size, $key in $grid-sizes {
+//   @include media(map-get($key, mq)) {
+//     .grid-#{$size}-flex {
+//       @include column-flex(map-get($key, gutter));
+//     }
+
+//     @for $i from 1 through $columns {
+//       .grid-w-#{$i}-of-#{$columns}-at-#{$size} {
+//         @include column-fixed($i / $columns, map-get($key, gutter));
+//       }
+
+//       .grid-pf-#{$i}-at-#{$size} {
+//         margin-left: col-width($i / $columns, -(map-get($key, gutter) / 2));
+//       }
+
+//       .grid-sf-#{$i}-at-#{$size} {
+//         margin-right: col-width($i / $columns, -(map-get($key, gutter) / 2));
+//       }
+//     }
+//   }
+// }
+
+// // generate prefix/suffix classes
+// @for $i from 1 through $columns {
+//   .grid-pf-#{$i} {
+//     margin-left: col-width($i / $columns, -($gutter/2));
+
+//     @each $size, $key in $grid-sizes {
+//       @include media(map-get($key, mq)) {
+//         margin-left: col-width($i / $columns, -(map-get($key, gutter)/2));
+//       }
+//     }
+//   }
+
+//   .grid-sf-#{$i} {
+//     margin-right: col-width($i/$columns, -($gutter / 2));
+
+//     @each $size, $key in $grid-sizes {
+//       @include media(map-get($key, mq)) {
+//         margin-right: col-width($i / $columns, -(map-get($key, gutter) / 2));
+//       }
+//     }
+//   }
+// }
+
+.show-grid {
+  //Some classes to help with this demo
+  outline: 1px solid $poppy;
+  background: transparentize($poppy, 0.95);
+
+  [class^='grid-'] {
+    outline: 1px solid $poppy;
+    background: transparentize($poppy, 0.95);
+  }
+}
+
+.grid-overlay {
+  display: none;
+
+  .show-columns & {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    pointer-events: none; // alow clicking links behind the overlay
+
+    [class^='grid-'] {
+      height: 100%;
+      outline: 1px solid transparentize($downriver, 0.25);
+      background: transparentize($downriver, 0.95);
+    }
+
+    .grid-row {
+      outline: 0;
+      background: none;
+    }
+  }
+}

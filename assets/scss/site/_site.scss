@@ -1,3 +1,6 @@
+@import "../layout/grid";
+
+@import "../layout/page";
 // @import "../layout/content-sidebar";
 // @import "../layout/sidebar-content";
 /*--------------------------------------------------------------
@@ -9,3 +12,7 @@
 ## Comments
 --------------------------------------------------------------*/
 @import "primary/comments";
+
+.site {
+    @include container;
+}
