@@ -37,7 +37,7 @@ gulp.task('scripts', function() {
 
 gulp.task('watch', function () {
     livereload.listen();
-    gulp.watch('./assets/scss/**/*.scss', ['sass-lint', 'sass']);
+    gulp.watch(['./assets/scss/**/*.scss', '**/*.php'], ['sass-lint', 'sass']);
     gulp.watch('./assets/js/src/*.js', ['scripts']);
 });
 
