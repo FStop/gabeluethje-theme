@@ -1,0 +1,12 @@
+.site-title {
+    margin: 0;
+    a {
+        text-decoration: none;
+        text-transform: lowercase;
+        font-family: 'Fira Mono', monospace;
+
+        &, &:visited {
+            color: $mariner;
+        }
+    }
+}

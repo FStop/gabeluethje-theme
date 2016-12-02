@@ -104,7 +104,7 @@ add_action( 'widgets_init', 'gabeluethje_widgets_init' );
 
 function gabeluethje_scripts() {
 	wp_enqueue_style( 'gabeluethje-style', get_template_directory_uri() . '/assets/css/style.css' );
-	wp_enqueue_style( 'gabeluethje-g-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' );
+	wp_enqueue_style( 'gabeluethje-g-fonts', 'https://fonts.googleapis.com/css?family=Fira+Mono|Fira+Sans:400,700' );
 
 	wp_enqueue_script( 'gabeluethje-fontfaceobserver', get_template_directory_uri() . '/assets/js/lib/fontfaceobserver.js', array(), '20161026', false );
 

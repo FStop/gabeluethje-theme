@@ -329,6 +329,15 @@ table {
   margin: 0 0 1.5em;
   width: 100%; }
 
+.site-title {
+  margin: 0; }
+  .site-title a {
+    text-decoration: none;
+    text-transform: lowercase;
+    font-family: 'Fira Mono', monospace; }
+    .site-title a, .site-title a:visited {
+      color: #2371d5; }
+
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
@@ -646,7 +655,7 @@ a {
   display: block; }
 
 body {
-  background: #fff5e8;
+  background: #fff;
   /* Fallback for when there is no custom background color defined. */ }
 
 .site {
