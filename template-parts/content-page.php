@@ -19,7 +19,7 @@
 			the_content();
 
 			wp_link_pages( array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'fstop' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'gabeluethje' ),
 				'after'  => '</div>',
 			) );
 		?>
@@ -31,7 +31,7 @@
 				edit_post_link(
 					sprintf(
 						/* translators: %s: Name of current post */
-						esc_html__( 'Edit %s', 'fstop' ),
+						esc_html__( 'Edit %s', 'gabeluethje' ),
 						the_title( '<span class="screen-reader-text">"', '"</span>', false )
 					),
 					'<span class="edit-link">',

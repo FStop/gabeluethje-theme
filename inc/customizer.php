@@ -1,6 +1,6 @@
 <?php
 /**
- * F-Stop Design Theme Customizer.
+ * Gabe Luethje Theme Customizer.
  *
  * @package F-Stop_Design
  */
@@ -10,17 +10,17 @@
  *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
-function fstop_customize_register( $wp_customize ) {
+function gabeluethje_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 }
-add_action( 'customize_register', 'fstop_customize_register' );
+add_action( 'customize_register', 'gabeluethje_customize_register' );
 
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
-function fstop_customize_preview_js() {
-	wp_enqueue_script( 'fstop_customizer', get_template_directory_uri() . '/assets/js/lib/customizer.js', array( 'customize-preview' ), '20151215', true );
+function gabeluethje_customize_preview_js() {
+	wp_enqueue_script( 'gabeluethje_customizer', get_template_directory_uri() . '/assets/js/lib/customizer.js', array( 'customize-preview' ), '20151215', true );
 }
-add_action( 'customize_preview_init', 'fstop_customize_preview_js' );
+add_action( 'customize_preview_init', 'gabeluethje_customize_preview_js' );

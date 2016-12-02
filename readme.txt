@@ -1,4 +1,4 @@
-=== F-Stop Design ===
+=== Gabe Luethje ===
 
 == Credits ==
 

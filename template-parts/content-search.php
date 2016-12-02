@@ -15,7 +15,7 @@
 
 		<?php if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
-			<?php fstop_posted_on(); ?>
+			<?php gabeluethje_posted_on(); ?>
 		</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
@@ -25,6 +25,6 @@
 	</div><!-- .entry-summary -->
 
 	<footer class="entry-footer">
-		<?php fstop_entry_footer(); ?>
+		<?php gabeluethje_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->
