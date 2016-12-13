@@ -19,7 +19,7 @@ $grid-sizes: (
   sm: (
     mq: '<medium',
     gutter: 15px,
-    outer-padding: 30px,
+    outer-padding: 15px,
     // calc function gives us variable outer padding (15px - 50px) between 320px and 729px viewport width
     // credit: http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
     // calc function gives us variable outer padding (15px - 50px) between 320px and 729px viewport width
@@ -79,45 +79,11 @@ $grid-sizes: (
 // @param {$size} - string, size key from $grid-sizes map
 // @param {$direction} - string, left, right, or full. Defaults to full
 // @param {$mq} - boolean, whether or not to generate media queries
-// @mixin bleed($size: 'md', $direction: 'full', $mq: false) {
-//   @if $size == 'fullscreen' {
-//     width: 100vw;
-//     margin-right: 0;
-//     margin-left: calc(-50vw + 50%);
-//   } @else {
-//     $amount: map-deep-get($grid-sizes, $size, bleed);
-//     @if $direction == 'right' {
-//       margin-right: $amount;
-//     } @else if $direction == 'left' {
-//       margin-left: $amount;
-//     } @else if $direction == 'full' {
-//       margin-right: $amount;
-//       margin-left: $amount;
-//     } @else {
-//       margin-right: $amount;
-//       margin-left: $amount;
-//     }
-
-//     @if $mq == true {
-//       @each $size, $key in $grid-sizes {
-//         $amount: map-get($key, bleed);
-//         @include media(map-get($key, mq)) {
-//           @if $direction == 'right' {
-//             margin-right: $amount;
-//           } @else if $direction == 'left' {
-//             margin-left: $amount;
-//           } @else if $direction == 'full' {
-//             margin-right: $amount;
-//             margin-left: $amount;
-//           } @else {
-//             margin-right: $amount;
-//             margin-left: $amount;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+@mixin bleed() {
+    width: 100vw;
+    margin-right: 0;
+    margin-left: calc(-50vw + 50%);
+}
 
 @mixin row($gutter: $gutter, $size: '', $mq: false) {
   display: flex;

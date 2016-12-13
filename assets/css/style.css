@@ -41,6 +41,35 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
+.hidden {
+  display: none; }
+
+.show-grid {
+  outline: 1px solid #fb9f1b;
+  background: rgba(251, 159, 27, 0.05); }
+  .show-grid [class^='grid-'] {
+    outline: 1px solid #fb9f1b;
+    background: rgba(251, 159, 27, 0.05); }
+
+.grid-overlay {
+  display: none; }
+  .show-columns .grid-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    pointer-events: none; }
+    .show-columns .grid-overlay [class^='grid-'] {
+      height: 100%;
+      outline: 1px solid rgba(14, 45, 85, 0.75);
+      background: rgba(14, 45, 85, 0.05); }
+    .show-columns .grid-overlay .grid-row {
+      outline: 0;
+      background: none; }
+
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
@@ -329,14 +358,145 @@ table {
   margin: 0 0 1.5em;
   width: 100%; }
 
-.site-title {
+@keyframes balance {
+  0% {
+    transform: translateY(0); }
+  50% {
+    transform: translateY(-30%); }
+  100% {
+    transform: translateY(30%); } }
+
+@keyframes balance-reverse {
+  0% {
+    transform: translateY(0); }
+  50% {
+    transform: translateY(30%); }
+  100% {
+    transform: translateY(-30%); } }
+
+@keyframes balance-rotate {
+  0% {
+    transform: rotate(0); }
+  50% {
+    transform: rotate(7deg); }
+  100% {
+    transform: rotate(-7deg); } }
+
+.site-header__top {
+  width: 100vw;
+  margin-right: 0;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  background: #4288DB;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px  20px;
+  z-index: 2; }
+
+.site-logo {
+  font-family: 'Fira Mono';
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
   margin: 0; }
-  .site-title a {
+  .site-logo__link {
     text-decoration: none;
-    text-transform: lowercase;
-    font-family: 'Fira Mono', monospace; }
-    .site-title a, .site-title a:visited {
-      color: #2371d5; }
+    font-size: 1.5rem; }
+    .site-logo__link, .site-logo__link:visited {
+      color: #fff; }
+
+.site-nav {
+  position: relative;
+  flex-basis: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  max-width: 150px;
+  height: 50px;
+  padding: 0 5px; }
+  .site-nav:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+    bottom: 8px;
+    left: 0;
+    animation: balance-rotate 10s alternate infinite; }
+  .site-nav:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-width: 8px 4px;
+    border-color: transparent transparent rgba(255, 255, 255, 0.5); }
+  .site-nav a {
+    display: flex;
+    color: #fff;
+    text-decoration: none;
+    align-items: center;
+    transition: all 0.3s ease; }
+    .site-nav a:hover {
+      color: #112233; }
+    .site-nav a:first-child .text {
+      display: block;
+      animation: balance 10s alternate infinite; }
+    .site-nav a:last-child .text {
+      display: block;
+      animation: balance-reverse 10s alternate infinite; }
+
+.site-description {
+  content: "";
+  display: table;
+  table-layout: fixed;
+  position: relative;
+  padding: 20px 20px 0;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  z-index: 1; }
+  .site-description.hidden {
+    display: block;
+    transform: translateY(-100%); }
+  .site-description__avatar {
+    float: left;
+    max-width: 20%;
+    margin-right: 20px; }
+    .site-description__avatar img {
+      display: block;
+      max-width: 100%; }
+  .site-description__text {
+    margin-bottom: 20px; }
+    .site-description__text p {
+      margin: 0;
+      line-height: 1.4; }
+  .site-description__links .text {
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important; }
+  .site-description__link {
+    text-decoration: none; }
+  .site-description__toggle {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    transform: translateY(calc(100% + 10px));
+    clear: both;
+    padding: 0 20px;
+    text-align: center; }
 
 /*--------------------------------------------------------------
 # Forms
@@ -593,32 +753,6 @@ a {
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/
-.show-grid {
-  outline: 1px solid #fb9f1b;
-  background: rgba(251, 159, 27, 0.05); }
-  .show-grid [class^='grid-'] {
-    outline: 1px solid #fb9f1b;
-    background: rgba(251, 159, 27, 0.05); }
-
-.grid-overlay {
-  display: none; }
-  .show-columns .grid-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    pointer-events: none; }
-    .show-columns .grid-overlay [class^='grid-'] {
-      height: 100%;
-      outline: 1px solid rgba(14, 45, 85, 0.75);
-      background: rgba(14, 45, 85, 0.05); }
-    .show-columns .grid-overlay .grid-row {
-      outline: 0;
-      background: none; }
-
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
@@ -664,7 +798,7 @@ body {
   margin: 0 auto; }
   @media (max-width: 45.615em) {
     .site {
-      padding: 0 30px; } }
+      padding: 0 15px; } }
   @media (min-width: 45.625em) {
     .site {
       padding: 0 50px; } }
