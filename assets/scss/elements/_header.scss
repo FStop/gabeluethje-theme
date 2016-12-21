@@ -170,8 +170,34 @@
     .text {
       @include hide-text;
     }
-    .icon-svg {
-      //fill: #fff;
+    .icon {
+      &-svg {
+        transition: fill 0.1s ease;
+      }
+
+      &-twitter {
+        &:hover {
+          fill: $color__twitter;
+        }
+      }
+
+      &-github {
+        &:hover {
+          fill: $color__github;
+        }
+      }
+
+      &-codepen {
+        &:hover {
+          fill: $color__codepen;
+        }
+      }
+
+      &-linkedin {
+        &:hover {
+          fill: $color__linkedin;
+        }
+      }
     }
   }
   &__link {

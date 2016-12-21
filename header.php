@@ -58,40 +58,7 @@
           <p class="site-description__text"><?php echo $description; /* WPCS: xss ok. */ ?></p>
       <?php } ?>
       <div class="site-description__links">
-        <nav>
-          <a href="https://twitter.com/actualgabe" title="twitter.com/actualgabe" class="site-description__link">
-            <span class="text">Twitter</span>
-            <span class="icon">
-              <svg viewBox="0 0 32 32" width="16" height="16" class="icon-svg icon-twitter">
-                <use xlink:href="#icon-twitter" />
-              </svg>
-            </span>
-          </a>
-          <a href="https://github.com/fstop" title="github.com/fstop" class="site-description__link">
-            <span class="text">Github</span>
-            <span class="icon">
-              <svg viewBox="0 0 32 32" width="16" height="16" class="icon-svg icon-github">
-                <use xlink:href="#icon-github" />
-              </svg>
-            </span>
-          </a>
-          <a href="https://twitter.com/actualgabe" title="twitter.com/actualgabe" class="site-description__link">
-            <span class="text">Codepen</span>
-            <span class="icon">
-              <svg viewBox="0 0 32 32" width="16" height="16" class="icon-svg icon-twitter">
-                <use xlink:href="#icon-codepen" />
-              </svg>
-            </span>
-          </a>
-          <a href="https://twitter.com/actualgabe" title="twitter.com/actualgabe" class="site-description__link">
-            <span class="text">LinkedIn</span>
-            <span class="icon">
-              <svg viewBox="0 0 32 32" width="16" height="16" class="icon-svg icon-linkedin">
-                <use xlink:href="#icon-linkedin" />
-              </svg>
-            </span>
-          </a>
-        </nav>
+        <?php gl_hm_get_template_part('template-parts/social-links', ['classname' => 'social-links']); ?>
       </div>
       <a href="#" class="site-description__toggle">
         <span class="show hidden">who?</span>
