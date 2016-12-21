@@ -1,7 +1,9 @@
 "use strict";
+const desc = document.querySelector('.site-description');
+const descToggle = document.querySelector('.site-description__toggle');
 
-const heyoo = () => {
-  alert('heyoooo');
-}
-
-heyoo();
+descToggle.addEventListener('click', (e) => {
+  e.preventDefault();
+  desc.classList.toggle('hidden');
+  descToggle.classList.toggle('hidden');
+});

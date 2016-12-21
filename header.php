@@ -32,6 +32,10 @@
           <span class="site-logo__luethje">luethje</span>
         </a>
       </h1>
+      <a href="#" class="site-description__toggle hidden">
+        <span class="who">who?</span>
+        <span class="hide">hide this</span>
+      </a>
       <nav id="site-navigation" class="site-nav" role="navigation">
         <?php
           $menuParameters = array(
@@ -48,7 +52,7 @@
         ?>
       </nav>
 		</div>
-    <div class="site-description">
+    <div class="site-description hidden">
       <div class="site-description__avatar">
         <?php echo get_avatar( '1', '400' ); ?>
       </div>
@@ -60,10 +64,6 @@
       <div class="site-description__links">
         <?php gl_hm_get_template_part('template-parts/social-links', ['classname' => 'social-links']); ?>
       </div>
-      <a href="#" class="site-description__toggle">
-        <span class="show hidden">who?</span>
-        <span class="hide">hide this</span>
-      </a>
     </div>
 	</header><!-- #masthead -->
 

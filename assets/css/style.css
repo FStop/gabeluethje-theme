@@ -382,16 +382,18 @@ table {
   100% {
     transform: rotate(-7deg); } }
 
-.site-header__top {
-  width: 100vw;
-  margin-right: 0;
-  margin-left: calc(-50vw + 50%);
-  position: relative;
-  background: #4288DB;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px  20px;
-  z-index: 2; }
+.site-header {
+  position: relative; }
+  .site-header__top {
+    width: 100vw;
+    margin-right: 0;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+    background: #4288DB;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px  20px;
+    z-index: 2; }
 
 .site-logo {
   font-family: 'Fira Mono';
@@ -452,11 +454,16 @@ table {
       animation: balance-reverse 10s alternate infinite; }
 
 .site-description {
-  position: relative;
-  padding: 20px 20px 0;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  padding: 20px;
+  margin-bottom: 20px;
   transform: translateY(0);
   transition: transform 0.3s ease;
-  z-index: 1; }
+  z-index: 1;
+  background-color: #fff; }
   .site-description:after {
     content: "";
     display: table;
@@ -503,11 +510,14 @@ table {
     position: absolute;
     display: block;
     bottom: 0;
-    left: 0;
-    transform: translateY(calc(100% + 10px));
+    left: 30px;
     clear: both;
     padding: 0 20px;
-    text-align: center; }
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px; }
+    .site-description__toggle, .site-description__toggle:visited {
+      color: #fff; }
     .site-description__toggle .who {
       display: none; }
     .site-description__toggle.hidden .who {
