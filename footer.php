@@ -15,7 +15,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'gabeluethje' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'gabeluethje' ), 'WordPress' ); ?></a>
+			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'gl' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'gl' ), 'WordPress' ); ?></a>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

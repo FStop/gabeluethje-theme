@@ -22,7 +22,7 @@
 <body <?php body_class(); ?>>
 <?php get_template_part('template-parts/svg-icons'); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'gabeluethje' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'gl' ); ?></a>
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="site-header__top">
