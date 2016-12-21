@@ -452,14 +452,15 @@ table {
       animation: balance-reverse 10s alternate infinite; }
 
 .site-description {
-  content: "";
-  display: table;
-  table-layout: fixed;
   position: relative;
   padding: 20px 20px 0;
   transform: translateY(0);
   transition: transform 0.3s ease;
   z-index: 1; }
+  .site-description:after {
+    content: "";
+    display: table;
+    clear: both; }
   .site-description.hidden {
     display: block;
     transform: translateY(-100%); }
@@ -507,6 +508,12 @@ table {
     clear: both;
     padding: 0 20px;
     text-align: center; }
+    .site-description__toggle .who {
+      display: none; }
+    .site-description__toggle.hidden .who {
+      display: block; }
+    .site-description__toggle.hidden .hide {
+      display: none; }
 
 /*--------------------------------------------------------------
 # Forms
@@ -728,28 +735,14 @@ a {
 /*--------------------------------------------------------------
 # Clearings
 --------------------------------------------------------------*/
-.clear:before,
 .clear:after,
-.entry-content:before,
 .entry-content:after,
-.comment-content:before,
 .comment-content:after,
-.site-header:before,
 .site-header:after,
-.site-content:before,
 .site-content:after,
-.site-footer:before,
 .site-footer:after {
   content: "";
   display: table;
-  table-layout: fixed; }
-
-.clear:after,
-.entry-content:after,
-.comment-content:after,
-.site-header:after,
-.site-content:after,
-.site-footer:after {
   clear: both; }
 
 /*--------------------------------------------------------------
