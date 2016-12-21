@@ -7,6 +7,8 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   concat = require('gulp-concat'),
   browserSync = require('browser-sync'),
+  eslint = require('gulp-eslint'),
+  babel = require("gulp-babel"),
   reload = browserSync.reload;
 
 gulp.task('sass-lint'), function() {
@@ -46,6 +48,8 @@ gulp.task('browser-sync', function() {
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
   return gulp.src('./assets/js/src/*.js')
+    .pipe(eslint())
+    .pipe(babel())
     .pipe(concat('scripts.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('assets/js/dist'))
