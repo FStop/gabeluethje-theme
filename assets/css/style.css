@@ -383,17 +383,26 @@ table {
     transform: rotate(-7deg); } }
 
 .site-header {
-  position: relative; }
+  position: relative;
+  background: #4288DB; }
   .site-header__top {
-    width: 100vw;
-    margin-right: 0;
-    margin-left: calc(-50vw + 50%);
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
     position: relative;
-    background: #4288DB;
     display: flex;
     justify-content: space-between;
     padding: 10px  20px;
     z-index: 2; }
+    @media (max-width: 45.615em) {
+      .site-header__top {
+        padding: 0 15px; } }
+    @media (min-width: 45.625em) {
+      .site-header__top {
+        padding: 0 50px; } }
+    @media (min-width: 64em) {
+      .site-header__top {
+        padding: 0 60px; } }
 
 .site-logo {
   font-family: 'Fira Mono';
@@ -454,23 +463,32 @@ table {
       animation: balance-reverse 10s alternate infinite; }
 
 .site-description {
-  position: absolute;
   width: 100%;
-  top: 100%;
-  left: 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
   padding: 20px;
   margin-bottom: 20px;
-  transform: translateY(0);
-  transition: transform 0.3s ease;
-  z-index: 1;
-  background-color: #fff; }
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  z-index: 1; }
+  @media (max-width: 45.615em) {
+    .site-description {
+      padding: 0 15px; } }
+  @media (min-width: 45.625em) {
+    .site-description {
+      padding: 0 50px; } }
+  @media (min-width: 64em) {
+    .site-description {
+      padding: 0 60px; } }
   .site-description:after {
     content: "";
     display: table;
     clear: both; }
   .site-description.hidden {
     display: block;
-    transform: translateY(-100%); }
+    max-height: 0; }
   .site-description__avatar {
     float: left;
     max-width: 20%;
@@ -805,20 +823,6 @@ a {
 body {
   background: #fff;
   /* Fallback for when there is no custom background color defined. */ }
-
-.site {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto; }
-  @media (max-width: 45.615em) {
-    .site {
-      padding: 0 15px; } }
-  @media (min-width: 45.625em) {
-    .site {
-      padding: 0 50px; } }
-  @media (min-width: 64em) {
-    .site {
-      padding: 0 60px; } }
 
 /*--------------------------------------------------------------
 # Infinite scroll

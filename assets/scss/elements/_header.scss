@@ -36,11 +36,11 @@
 
 .site-header {
   position: relative;
+  background: #4288DB;
 
   &__top {
-    @include bleed;
+    @include container;
     position: relative;
-    background: #4288DB;
     display: flex;
     justify-content: space-between;
     padding: 10px  20px;
@@ -138,21 +138,19 @@
 }
 
 .site-description {
+  @include container;
   @include clearfix;
-  position: absolute;
   width: 100%;
-  top: 100%;
-  left: 0;
   padding: 20px;
   margin-bottom: 20px;
-  transform: translateY(0);
-  transition: transform 0.3s ease;
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
   z-index: 1;
-  background-color: #fff;
 
   &.hidden {
     display: block;
-    transform: translateY(-100%);
+    max-height: 0;
   }
 
   &__avatar {
