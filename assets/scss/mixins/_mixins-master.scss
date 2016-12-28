@@ -57,3 +57,31 @@
 .hidden {
   display: none;
 }
+
+@mixin nudge($amount, $direction) {
+  position: relative;
+  @if $direction == 'up' {
+    bottom: $amount;
+  } @else if $direction == 'right' {
+    left: $amount;
+  } @else if $direction == 'down' {
+    top: $amount;
+  } @else if $direction == 'left' {
+    right: $amount;
+  } @else {
+    @warn "#{$direction} ain't right. Should be 'up', 'down', 'left', or 'right';"
+  }
+}
+
+@mixin centered($direction) {
+  position: absolute;
+  @if $direction == 'v' {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $direction = 'h' {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else {
+    @warn "#{$direction} ain\'t right. Should be 'h' or 'v';"
+  }
+}

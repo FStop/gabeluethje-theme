@@ -31,11 +31,11 @@
           <span class="site-logo__gabriel">gabriel</span>
           <span class="site-logo__luethje">luethje</span>
         </a>
+        <span class="site-description__toggle hidden">
+          <span class="who">who?</span>
+          <span class="hide">close</span>
+        </span>
       </h1>
-      <a href="#" class="site-description__toggle hidden">
-        <span class="who">who?</span>
-        <span class="hide">hide this</span>
-      </a>
       <nav id="site-navigation" class="site-nav" role="navigation">
         <?php
           $menuParameters = array(

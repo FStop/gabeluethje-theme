@@ -36,7 +36,7 @@
 
 .site-header {
   position: relative;
-  background: #4288DB;
+  background: $color-blue;
 
   &__top {
     @include container;
@@ -53,16 +53,17 @@
 }
 
 .site-logo {
+  position: relative;
   font-family: 'Fira Mono';
   flex-basis: 50%;
-  display: flex;
-  align-items: center;
   margin: 0;
   //background-color: #ccc;
 
   &__link {
+    display: block;
     text-decoration: none;
     font-size: 1.5rem;
+
     &, &:visited {
       color: #fff;
     }
@@ -141,12 +142,12 @@
   @include container;
   @include clearfix;
   width: 100%;
-  padding: 20px;
-  margin-bottom: 20px;
-  max-height: 500px;
+  max-height: 200px;
   overflow: hidden;
   transition: max-height 0.3s ease;
   z-index: 1;
+  color: $white;
+  background-color: rgba($black, 0.1);
 
   &.hidden {
     display: block;
@@ -156,7 +157,7 @@
   &__avatar {
     float: left;
     max-width: 20%;
-    margin-right: 20px;
+    margin: 20px 20px 20px 0;
 
     img {
       display: block;
@@ -165,7 +166,7 @@
   }
 
   &__text {
-    margin-bottom: 20px;
+    margin: 20px 0;
 
     p {
       margin: 0;
@@ -180,11 +181,16 @@
     .icon {
       &-svg {
         transition: fill 0.1s ease;
+        fill: $white;
+
+        &:hover {
+          fill: $black;
+        }
       }
 
       &-twitter {
         &:hover {
-          fill: $color__twitter;
+          fill: shade($color__twitter, 50%);
         }
       }
 
@@ -202,7 +208,7 @@
 
       &-linkedin {
         &:hover {
-          fill: $color__linkedin;
+          fill: shade($color__linkedin, 50%);
         }
       }
     }
@@ -213,22 +219,29 @@
   }
 
   &__toggle {
-    position: absolute;
+    @include nudge(10px, 'right');
     display: block;
-    bottom: 0;
-    left: 30px;
-    clear: both;
-    padding: 0 20px;
-    text-align: center;
-    text-decoration: none;
     font-size: 14px;
+    color: rgba($white, 0.7);
+    cursor: pointer;
 
-    &, &:visited {
+    &:hover {
       color: $white;
     }
 
     .who {
       display: none;
+    }
+
+    .hide {
+      position: relative;
+
+      &:after {
+        position: absolute;
+        left: -10px;
+        @include centered('v');
+        content: "\00d7";
+      }
     }
 
     &.hidden {
